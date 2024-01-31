@@ -10,10 +10,6 @@ int myFunction(int, int);
 const char *ssid = "ChinaNet-h7tR";
 const char *password = "88888888";
 
-String url = "http://apis.juhe.cn/simpleWeather/query";
-String key = "05cc6ee9f989505cc4acb5f97838d83a";
-String city = "北京";
-
 void setup()
 {
     // put your setup code here, to run once:
@@ -37,7 +33,8 @@ void setup()
     HTTPClient http;
 
     // url
-    String request_url = url + "?city=" + city + "&key=" + key;
+    // login
+    String request_url = "http://192.168.2.214:8080/page/test";
     http.begin(request_url);
 
     // receive status
@@ -60,12 +57,8 @@ void setup()
 
     // get value from json
     // get temperature
-    String area = doc["result"]["city"].as<String>();
-    int temp = doc["result"]["realtime"]["temperature"].as<int>();
-    String info = doc["result"]["realtime"]["info"].as<String>();
-    int aqi = doc["result"]["realtime"]["aqi"].as<int>();
-
-    Serial.printf("城市：%s, 温度：%d, 天气：%s, 空气指数：%d\n", area, temp, info, aqi);
+    String data = doc["data"].as<String>();
+    Serial.printf("data: %s\n", data);
 }
 
 void loop()
